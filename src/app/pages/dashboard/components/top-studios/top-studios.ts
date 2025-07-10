@@ -6,23 +6,24 @@ import {
 import { CommonModule } from '@angular/common';
 import {
   MovieService,
-  YearWithMultipleWinners,
+  StudioWithWinCount,
 } from '../../../../services/movie.service';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-list-with-multiple-winners',
+  selector: 'app-top-studios',
   imports: [CommonModule, BaseTableComponent],
-  templateUrl: './list-with-multiple-winners.html',
-  styleUrl: './list-with-multiple-winners.scss',
+  templateUrl: './top-studios.html',
+  styleUrl: './top-studios.scss',
 })
-export class ListWIthMultipleWinners implements OnInit {
+export class TopStudiosComponent implements OnInit {
   tableColumns: TableColumn[] = [
-    { key: 'year', label: 'Year', width: '100px' },
-    { key: 'winnerCount', label: 'Winner Count', width: '150px' },
+    { key: 'name', label: 'Studio Name' },
+    { key: 'winCount', label: 'Win Count', width: '150px' },
   ];
 
-  tableData: YearWithMultipleWinners[] = [];
+  tableData: StudioWithWinCount[] = [];
   loading = false;
   error: string | null = null;
 
@@ -38,7 +39,7 @@ export class ListWIthMultipleWinners implements OnInit {
 
     // Try to load from API first, fallback to mock data
     this.movieService
-      .getYearsWithMultipleWinners()
+      .getStudiosWithWinCount()
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -46,7 +47,7 @@ export class ListWIthMultipleWinners implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          this.tableData = response.years;
+          this.tableData = response.studios;
         },
         error: (error) => {
           this.error = error.message;
