@@ -1,8 +1,13 @@
 .dashboard-container {
-  padding: 0;
+  padding: 24px;
+  background: #f9fafb;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-.dashboard-content {
-  display: flex;
-  gap: 30px;
+
+.card {
+  width: calc(50% - 15px);
 }

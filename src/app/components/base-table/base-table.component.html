@@ -1,0 +1,53 @@
+<div class="table-card">
+  <div class="table-header">
+    <div class="header-content">
+      <h2 class="table-title">{{ title }}</h2>
+      <div class="search-container" *ngIf="showSearch">
+        <input
+          type="text"
+          class="search-input"
+          [(ngModel)]="searchValue"
+          [placeholder]="searchPlaceholder"
+          (keyup.enter)="handleSearch()"
+        />
+        <button class="search-button" (click)="handleSearch()">
+          <i class="search-icon">🔍</i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-content">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" [style.width]="column.width">
+              <span>{{ column.label }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="loading" class="loading-row">
+            <td [attr.colspan]="columns.length" class="loading-cell">
+              <div class="loading-spinner">
+                <div class="spinner"></div>
+                <span>Carregando...</span>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && data.length === 0" class="empty-row">
+            <td [attr.colspan]="columns.length" class="empty-cell">
+              {{ emptyMessage }}
+            </td>
+          </tr>
+          <tr *ngFor="let row of data; index as i" class="data-row">
+            <td *ngFor="let column of columns">
+              {{ getCellValue(row, column) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

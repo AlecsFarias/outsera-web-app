@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ListWIthMultipleWinners } from './components/list-with-multiple-winners/list-with-multiple-winners';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [ListWIthMultipleWinners],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

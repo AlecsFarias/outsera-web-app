@@ -1,0 +1,10 @@
+<app-base-table
+  title="System users"
+  [columns]="tableColumns"
+  [data]="filteredData"
+  [loading]="loading"
+  [showSearch]="true"
+  searchPlaceholder="Search users..."
+  (onSearch)="onSearch($event)"
+  emptyMessage="No data available"
+></app-base-table>
