@@ -6,6 +6,15 @@ export interface TableColumn {
   key: string;
   label: string;
   width?: string;
+  searchable?: boolean;
+  searchType?: 'text' | 'number' | 'select';
+  searchOptions?: { value: string; label: string }[];
+  searchPlaceholder?: string;
+}
+
+export interface ColumnSearchEvent {
+  column: string;
+  value: string;
 }
 
 @Component({
@@ -28,6 +37,11 @@ export class BaseTableComponent {
   @Input() isMultiple: boolean = false;
   @Input() subtitles: string[] = [];
 
+  // Column search properties
+  @Input() showColumnSearch: boolean = false;
+  @Output() onColumnSearch = new EventEmitter<ColumnSearchEvent>();
+
+  // Pagination properties
   @Input() showPagination: boolean = false;
   @Input() currentPage: number = 0;
   @Input() totalPages: number = 0;
@@ -38,9 +52,15 @@ export class BaseTableComponent {
   @Output() onLastPage = new EventEmitter<void>();
 
   searchValue: string = '';
+  columnSearchValues: { [key: string]: string } = {};
 
   handleSearch(): void {
     this.onSearch.emit(this.searchValue);
+  }
+
+  handleColumnSearch(column: TableColumn, value: string): void {
+    this.columnSearchValues[column.key] = value;
+    this.onColumnSearch.emit({ column: column.key, value });
   }
 
   getCellValue(row: any, column: TableColumn): any {

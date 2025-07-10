@@ -150,9 +150,23 @@ export class MovieService {
   }
 
   /**
-   * Get movies with pagination
+   * Get movies with pagination and filters
    */
-  getMovies(page: number = 0, size: number = 10): Observable<MoviesResponse> {
-    return this.httpService.get<MoviesResponse>('/movies', { page, size });
+  getMovies(
+    page: number = 0,
+    size: number = 10,
+    filters?: { year?: number; winner?: boolean }
+  ): Observable<MoviesResponse> {
+    const params: any = { page, size };
+
+    if (filters?.year) {
+      params.year = filters.year;
+    }
+
+    if (filters?.winner !== undefined) {
+      params.winner = filters.winner;
+    }
+
+    return this.httpService.get<MoviesResponse>('/movies', params);
   }
 }

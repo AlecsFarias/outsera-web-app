@@ -31,6 +31,64 @@
               <span>{{ column.label }}</span>
             </th>
           </tr>
+          <tr *ngIf="showColumnSearch" class="column-search-row">
+            <th *ngFor="let column of columns" class="column-search-cell">
+              <div class="column-search-container" *ngIf="column.searchable">
+                <!-- Text search -->
+                <input
+                  *ngIf="!column.searchType || column.searchType === 'text'"
+                  type="text"
+                  class="column-search-input"
+                  [placeholder]="column.searchPlaceholder || 'Search...'"
+                  [(ngModel)]="columnSearchValues[column.key]"
+                  (input)="
+                    handleColumnSearch(
+                      column,
+                      columnSearchValues[column.key] || ''
+                    )
+                  "
+                />
+
+                <!-- Number search -->
+                <input
+                  *ngIf="column.searchType === 'number'"
+                  type="number"
+                  class="column-search-input"
+                  [placeholder]="column.searchPlaceholder || 'Search...'"
+                  [(ngModel)]="columnSearchValues[column.key]"
+                  (input)="
+                    handleColumnSearch(
+                      column,
+                      columnSearchValues[column.key] || ''
+                    )
+                  "
+                />
+
+                <!-- Select search -->
+                <select
+                  *ngIf="column.searchType === 'select'"
+                  class="column-search-select"
+                  [(ngModel)]="columnSearchValues[column.key]"
+                  (change)="
+                    handleColumnSearch(
+                      column,
+                      columnSearchValues[column.key] || ''
+                    )
+                  "
+                >
+                  <option value="">
+                    {{ column.searchPlaceholder || "All" }}
+                  </option>
+                  <option
+                    *ngFor="let option of column.searchOptions"
+                    [value]="option.value"
+                  >
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+            </th>
+          </tr>
         </thead>
         <tbody>
           <tr *ngIf="loading" class="loading-row">
@@ -64,6 +122,64 @@
           <tr>
             <th *ngFor="let column of columns" [style.width]="column.width">
               <span>{{ column.label }}</span>
+            </th>
+          </tr>
+          <tr *ngIf="showColumnSearch" class="column-search-row">
+            <th *ngFor="let column of columns" class="column-search-cell">
+              <div class="column-search-container" *ngIf="column.searchable">
+                <!-- Text search -->
+                <input
+                  *ngIf="!column.searchType || column.searchType === 'text'"
+                  type="text"
+                  class="column-search-input"
+                  [placeholder]="column.searchPlaceholder || 'Search...'"
+                  [(ngModel)]="columnSearchValues[column.key]"
+                  (input)="
+                    handleColumnSearch(
+                      column,
+                      columnSearchValues[column.key] || ''
+                    )
+                  "
+                />
+
+                <!-- Number search -->
+                <input
+                  *ngIf="column.searchType === 'number'"
+                  type="number"
+                  class="column-search-input"
+                  [placeholder]="column.searchPlaceholder || 'Search...'"
+                  [(ngModel)]="columnSearchValues[column.key]"
+                  (input)="
+                    handleColumnSearch(
+                      column,
+                      columnSearchValues[column.key] || ''
+                    )
+                  "
+                />
+
+                <!-- Select search -->
+                <select
+                  *ngIf="column.searchType === 'select'"
+                  class="column-search-select"
+                  [(ngModel)]="columnSearchValues[column.key]"
+                  (change)="
+                    handleColumnSearch(
+                      column,
+                      columnSearchValues[column.key] || ''
+                    )
+                  "
+                >
+                  <option value="">
+                    {{ column.searchPlaceholder || "All" }}
+                  </option>
+                  <option
+                    *ngFor="let option of column.searchOptions"
+                    [value]="option.value"
+                  >
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
             </th>
           </tr>
         </thead>

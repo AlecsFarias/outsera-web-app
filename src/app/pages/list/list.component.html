@@ -6,6 +6,7 @@
       [data]="data"
       [loading]="loading"
       [showSearch]="false"
+      [showColumnSearch]="true"
       [showPagination]="true"
       [currentPage]="currentPage"
       [totalPages]="totalPages"
@@ -15,6 +16,7 @@
       (onNextPage)="onNextPage()"
       (onFirstPage)="onFirstPage()"
       (onLastPage)="onLastPage()"
+      (onColumnSearch)="onColumnSearch($event)"
     ></app-base-table>
   </div>
 </div>

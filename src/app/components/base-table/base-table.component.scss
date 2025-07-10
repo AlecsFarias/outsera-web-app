@@ -96,6 +96,39 @@
           color: #374151;
           border-bottom: 1px solid grey;
         }
+
+        .column-search-row {
+          background: #f8f9fa;
+
+          .column-search-cell {
+            padding: 8px 12px;
+            border-bottom: 1px solid #dee2e6;
+
+            .column-search-container {
+              width: 100%;
+
+              .column-search-input,
+              .column-search-select {
+                width: 100%;
+                padding: 4px 8px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                font-size: 0.875rem;
+                background: white;
+
+                &:focus {
+                  outline: none;
+                  border-color: #80bdff;
+                  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                }
+              }
+
+              .column-search-select {
+                cursor: pointer;
+              }
+            }
+          }
+        }
       }
 
       tbody {
@@ -173,7 +206,7 @@
 }
 
 .pagination-btn {
-  background: rgb(0,0,0,0);
+  background: rgb(0, 0, 0, 0);
   color: #6c757d;
   padding: 6px 10px;
   cursor: pointer;
@@ -187,7 +220,7 @@
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: rgb(0,0,0,0);
+  background: rgb(0, 0, 0, 0);
 }
 
 .pagination-btn:disabled {
@@ -202,7 +235,7 @@
 }
 
 .pagination-number {
-  background: rgb(0,0,0,0);
+  background: rgb(0, 0, 0, 0);
   color: #6c757d;
   padding: 6px 10px;
   cursor: pointer;
@@ -329,6 +362,20 @@
         tbody td {
           padding: 8px;
           font-size: 0.75rem;
+        }
+
+        .column-search-row {
+          .column-search-cell {
+            padding: 4px 8px;
+
+            .column-search-container {
+              .column-search-input,
+              .column-search-select {
+                padding: 2px 4px;
+                font-size: 0.75rem;
+              }
+            }
+          }
         }
       }
     }
