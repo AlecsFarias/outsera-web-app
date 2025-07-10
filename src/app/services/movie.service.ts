@@ -49,6 +49,17 @@ export interface ProducersIntervals {
   max: ProducerInterval[];
 }
 
+export interface MovieWinner {
+  id: number;
+  year: number;
+  title: string;
+  studios: string[];
+  producers: string[];
+  winner: boolean;
+}
+
+export type WinnersByYear = MovieWinner[];
+
 @Injectable({
   providedIn: 'root',
 })
@@ -84,5 +95,13 @@ export class MovieService {
     return this.httpService.get<ProducersIntervals>(
       '/movies/maxMinWinIntervalForProducers'
     );
+  }
+
+  /**
+   * Get movie winners by year
+   */
+  getWinnersByYear(year?: number): Observable<WinnersByYear> {
+    const params = year ? { year } : {};
+    return this.httpService.get<WinnersByYear>('/movies/winnersByYear', params);
   }
 }

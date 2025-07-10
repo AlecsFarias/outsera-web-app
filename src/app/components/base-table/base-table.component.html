@@ -4,7 +4,7 @@
       <h2 class="table-title">{{ title }}</h2>
       <div class="search-container" *ngIf="showSearch">
         <input
-          type="text"
+          [type]="searchType"
           class="search-input"
           [(ngModel)]="searchValue"
           [placeholder]="searchPlaceholder"

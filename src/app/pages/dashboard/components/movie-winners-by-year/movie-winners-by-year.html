@@ -1,0 +1,11 @@
+<app-base-table
+  title="List movie winners by year"
+  [columns]="columns"
+  [data]="data"
+  [loading]="loading"
+  [showSearch]="true"
+  searchType="number"
+  searchPlaceholder="Search by year (leave empty for all winners)..."
+  emptyMessage="Enter a year to search for movie winners or leave empty for all"
+  (onSearch)="onSearch($event)"
+></app-base-table>

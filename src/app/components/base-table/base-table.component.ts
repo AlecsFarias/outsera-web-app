@@ -23,6 +23,7 @@ export class BaseTableComponent {
   @Input() emptyMessage: string = 'No data available';
   @Input() showSearch: boolean = false;
   @Input() searchPlaceholder: string = 'Search...';
+  @Input() searchType: 'text' | 'number' = 'text';
   @Output() onSearch = new EventEmitter<string>();
   @Input() isMultiple: boolean = false;
   @Input() subtitles: string[] = [];

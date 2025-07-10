@@ -1,0 +1,22 @@
+// Component-specific styles for movie winners by year
+// Inherits all styles from base-table component
+
+.movie-winners-by-year {
+  // Add any specific styling if needed
+  width: 100%;
+
+  .year-highlight {
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .title-cell {
+    font-weight: 500;
+  }
+
+  .studios-cell,
+  .producers-cell {
+    font-size: 0.9em;
+    color: #666;
+  }
+}
