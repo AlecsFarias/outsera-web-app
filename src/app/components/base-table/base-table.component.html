@@ -17,6 +17,46 @@
     </div>
   </div>
 
+  @if (isMultiple) { @for (data of data; track $index) {
+  <div class="table-content">
+    <div class="table-subtitle" *ngIf="subtitles && subtitles.length > $index">
+      {{ subtitles[$index] }}
+    </div>
+
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" [style.width]="column.width">
+              <span>{{ column.label }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="loading" class="loading-row">
+            <td [attr.colspan]="columns.length" class="loading-cell">
+              <div class="loading-spinner">
+                <div class="spinner"></div>
+                <span>Carregando...</span>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && data.length === 0" class="empty-row">
+            <td [attr.colspan]="columns.length" class="empty-cell">
+              {{ emptyMessage }}
+            </td>
+          </tr>
+          <tr *ngFor="let row of data; index as i" class="data-row">
+            <td *ngFor="let column of columns">
+              {{ getCellValue(row, column) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  } } @else {
   <div class="table-content">
     <div class="table-container">
       <table class="data-table">
@@ -50,4 +90,5 @@
       </table>
     </div>
   </div>
+  }
 </div>

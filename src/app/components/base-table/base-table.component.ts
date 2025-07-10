@@ -24,6 +24,8 @@ export class BaseTableComponent {
   @Input() showSearch: boolean = false;
   @Input() searchPlaceholder: string = 'Search...';
   @Output() onSearch = new EventEmitter<string>();
+  @Input() isMultiple: boolean = false;
+  @Input() subtitles: string[] = [];
 
   searchValue: string = '';
 

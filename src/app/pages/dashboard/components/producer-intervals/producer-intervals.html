@@ -1,0 +1,9 @@
+<app-base-table
+  title="Top 3 studios with winners"
+  [columns]="tableColumns"
+  [data]="[maxIntervalData, minIntervalData]"
+  [isMultiple]="true"
+  [subtitles]="['Maximum', 'Minimum']"
+  [loading]="loading"
+  emptyMessage="No data available"
+></app-base-table>

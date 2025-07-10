@@ -37,6 +37,18 @@ export interface StudiosWithWinCount {
   studios: StudioWithWinCount[];
 }
 
+export interface ProducerInterval {
+  producer: string;
+  interval: number;
+  previousWin: number;
+  followingWin: number;
+}
+
+export interface ProducersIntervals {
+  min: ProducerInterval[];
+  max: ProducerInterval[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -63,5 +75,14 @@ export class MovieService {
           studios: response.studios.slice(0, 3),
         }))
       );
+  }
+
+  /**
+   * Get producers with longest and shortest interval between wins
+   */
+  getProducersWinIntervals(): Observable<ProducersIntervals> {
+    return this.httpService.get<ProducersIntervals>(
+      '/movies/maxMinWinIntervalForProducers'
+    );
   }
 }
