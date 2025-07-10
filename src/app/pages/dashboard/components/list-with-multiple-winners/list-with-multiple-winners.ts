@@ -36,7 +36,6 @@ export class ListWIthMultipleWinners implements OnInit {
     this.loading = true;
     this.error = null;
 
-    // Try to load from API first, fallback to mock data
     this.movieService
       .getYearsWithMultipleWinners()
       .pipe(

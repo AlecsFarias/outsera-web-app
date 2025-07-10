@@ -43,32 +43,9 @@ export class ProducerIntervalsComponent implements OnInit {
     this.loading = true;
     this.error = null;
 
-    // Try to load from API first, fallback to mock data
     this.movieService
       .getProducersWinIntervals()
       .pipe(
-        catchError((error) => {
-          console.warn('API call failed, using mock data:', error);
-          // Return mock data as fallback
-          return of({
-            min: [
-              {
-                producer: 'Joel Silver',
-                interval: 1,
-                previousWin: 1991,
-                followingWin: 1992,
-              },
-            ],
-            max: [
-              {
-                producer: 'Matthew Vaughn',
-                interval: 13,
-                previousWin: 2002,
-                followingWin: 2015,
-              },
-            ],
-          });
-        }),
         finalize(() => {
           this.loading = false;
         })

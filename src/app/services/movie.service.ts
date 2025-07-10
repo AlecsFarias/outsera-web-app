@@ -12,6 +12,50 @@ export interface YearsWithMoreThanOneWinner {
   years: YearWithMultipleWinners[];
 }
 
+export interface Content {
+  id: number;
+  year: number;
+  title: string;
+  studios: string[];
+  producers: string[];
+  winner: boolean;
+}
+
+export interface Pageable {
+  pageNumber: number;
+  pageSize: number;
+  sort: Sort;
+  offset: number;
+  unpaged: boolean;
+  paged: boolean;
+}
+
+export interface Sort {
+  unsorted: boolean;
+  sorted: boolean;
+  empty: boolean;
+}
+
+export interface Sort2 {
+  unsorted: boolean;
+  sorted: boolean;
+  empty: boolean;
+}
+
+export interface MoviesResponse {
+  content: Content[];
+  pageable: Pageable;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  numberOfElements: number;
+  size: number;
+  number: number;
+  sort: Sort2;
+  first: boolean;
+  empty: boolean;
+}
+
 export interface Movie {
   id: number;
   year: number;
@@ -103,5 +147,12 @@ export class MovieService {
   getWinnersByYear(year?: number): Observable<WinnersByYear> {
     const params = year ? { year } : {};
     return this.httpService.get<WinnersByYear>('/movies/winnersByYear', params);
+  }
+
+  /**
+   * Get movies with pagination
+   */
+  getMovies(page: number = 0, size: number = 10): Observable<MoviesResponse> {
+    return this.httpService.get<MoviesResponse>('/movies', { page, size });
   }
 }

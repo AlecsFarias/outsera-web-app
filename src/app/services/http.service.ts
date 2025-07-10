@@ -50,12 +50,6 @@ export class HttpService {
       Accept: 'application/json',
     });
 
-    // Add authorization header if token exists
-    const token = this.getAuthToken();
-    if (token) {
-      return headers.set('Authorization', `Bearer ${token}`);
-    }
-
     return headers;
   }
 
@@ -87,26 +81,15 @@ export class HttpService {
    * Build full URL
    */
   private buildFullUrl(url: string): string {
-    // If URL already starts with http/https, return as is
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
 
-    // If URL already contains the base URL, return as is
     if (url.includes(this.baseUrl)) {
       return url;
     }
 
     return `${this.baseUrl}${url}`;
-  }
-
-  /**
-   * Get authentication token
-   */
-  private getAuthToken(): string | null {
-    // Implement your token storage logic here
-    // Example: return localStorage.getItem('authToken');
-    return null;
   }
 
   /**
@@ -116,10 +99,8 @@ export class HttpService {
     let errorMessage = 'An error occurred';
 
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
 
       if (error.error && error.error.message) {

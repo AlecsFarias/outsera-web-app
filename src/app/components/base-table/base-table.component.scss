@@ -161,6 +161,71 @@
   }
 }
 
+.pagination-container {
+  background: #f8f9fa;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  background: rgb(0,0,0,0);
+  color: #6c757d;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: rgb(0,0,0,0);
+}
+
+.pagination-btn:disabled {
+  color: #ced4da;
+  cursor: not-allowed;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 2px;
+  margin: 0 8px;
+}
+
+.pagination-number {
+  background: rgb(0,0,0,0);
+  color: #6c757d;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-number:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.pagination-number.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -170,7 +235,6 @@
   }
 }
 
-// Responsive design
 @media (max-width: 768px) {
   .table-card {
     .table-header {
@@ -207,6 +271,27 @@
         }
       }
     }
+  }
+
+  .pagination-controls {
+    flex-direction: row;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pagination-numbers {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 4px;
+  }
+
+  .pagination-btn,
+  .pagination-number {
+    min-width: 28px;
+    height: 28px;
+    padding: 4px 8px;
+    font-size: 12px;
   }
 }
 

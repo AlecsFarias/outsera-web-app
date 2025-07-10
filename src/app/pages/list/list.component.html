@@ -1,0 +1,20 @@
+<div class="list-container">
+  <div class="card">
+    <app-base-table
+      title="List movies"
+      [columns]="columns"
+      [data]="data"
+      [loading]="loading"
+      [showSearch]="false"
+      [showPagination]="true"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      emptyMessage="No movies found"
+      (onPageChange)="onPageChange($event)"
+      (onPreviousPage)="onPreviousPage()"
+      (onNextPage)="onNextPage()"
+      (onFirstPage)="onFirstPage()"
+      (onLastPage)="onLastPage()"
+    ></app-base-table>
+  </div>
+</div>

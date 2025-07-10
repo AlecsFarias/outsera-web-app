@@ -28,6 +28,15 @@ export class BaseTableComponent {
   @Input() isMultiple: boolean = false;
   @Input() subtitles: string[] = [];
 
+  @Input() showPagination: boolean = false;
+  @Input() currentPage: number = 0;
+  @Input() totalPages: number = 0;
+  @Output() onPageChange = new EventEmitter<number>();
+  @Output() onPreviousPage = new EventEmitter<void>();
+  @Output() onNextPage = new EventEmitter<void>();
+  @Output() onFirstPage = new EventEmitter<void>();
+  @Output() onLastPage = new EventEmitter<void>();
+
   searchValue: string = '';
 
   handleSearch(): void {
@@ -36,5 +45,52 @@ export class BaseTableComponent {
 
   getCellValue(row: any, column: TableColumn): any {
     return row[column.key];
+  }
+
+  handlePageChange(page: number): void {
+    this.onPageChange.emit(page);
+  }
+
+  handlePreviousPage(): void {
+    this.onPreviousPage.emit();
+  }
+
+  handleNextPage(): void {
+    this.onNextPage.emit();
+  }
+
+  handleFirstPage(): void {
+    this.onFirstPage.emit();
+  }
+
+  handleLastPage(): void {
+    this.onLastPage.emit();
+  }
+
+  getVisiblePages(): number[] {
+    const maxVisiblePages = 5;
+    const pages: number[] = [];
+
+    if (this.totalPages <= maxVisiblePages) {
+      for (let i = 0; i < this.totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      let start = Math.max(
+        0,
+        this.currentPage - Math.floor(maxVisiblePages / 2)
+      );
+      let end = Math.min(this.totalPages - 1, start + maxVisiblePages - 1);
+
+      if (end === this.totalPages - 1) {
+        start = Math.max(0, end - maxVisiblePages + 1);
+      }
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+    }
+
+    return pages;
   }
 }
