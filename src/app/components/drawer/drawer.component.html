@@ -1,0 +1,11 @@
+<aside class="drawer">
+  <nav class="drawer-nav">
+    <ul class="nav-list">
+      <li class="nav-item" *ngFor="let item of menuItems">
+        <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
+          <span class="nav-label">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>
